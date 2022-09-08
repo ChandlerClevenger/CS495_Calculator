@@ -1,21 +1,27 @@
-package java;
+package methods;
 
-public class Calculations {
+public class Function {
 
     public int quaternaryToDecimal(int qua){
-        return 0;
+        int sum = 0;
+        StringBuilder result = new StringBuilder();
+        result.append(qua);
+        result.reverse();
+        for(int i = 0; i < result.length(); i++){
+            int currentNumber = Integer.parseInt(String.valueOf(result.charAt(i)));
+            sum += currentNumber * Math.pow(4,i);
+        }
+        return sum;
     }
 
     public int decimalToQuaternary(int decimal){
-        String result = "";
-        while(decimal > 0){
-            result += decimal % 4;
+        StringBuilder result = new StringBuilder();
+        while(decimal > 0) {
+            result.append(decimal % 4);
             decimal /= 4;
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(result);
-        stringBuilder.reverse();
-        return Integer.parseInt(stringBuilder.toString());
+        result.reverse();
+        return Integer.parseInt(result.toString());
     }
 
     public int add(int left, int right){

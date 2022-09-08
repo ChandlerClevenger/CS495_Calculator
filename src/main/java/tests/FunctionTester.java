@@ -1,8 +1,8 @@
 package tests;
 
-import java.Calculations;
-public class CalculationsTester {
-    Calculations calculations = new Calculations();
+import methods.Function;
+public class FunctionTester {
+    Function calculations = new Function();
 
     public void testQuaternaryToDecimal(){
 
