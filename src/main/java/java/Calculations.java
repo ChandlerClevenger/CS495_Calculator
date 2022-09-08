@@ -1,6 +1,22 @@
-package methods;
+package java;
 
 public class Calculations {
+
+    public int quaternaryToDecimal(int qua){
+        return 0;
+    }
+
+    public int decimalToQuaternary(int decimal){
+        String result = "";
+        while(decimal > 0){
+            result += decimal % 4;
+            decimal /= 4;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(result);
+        stringBuilder.reverse();
+        return Integer.parseInt(stringBuilder.toString());
+    }
 
     public int add(int left, int right){
         return left + right;
