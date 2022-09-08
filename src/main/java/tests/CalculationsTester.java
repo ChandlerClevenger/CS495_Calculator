@@ -1,6 +1,6 @@
 package tests;
 
-import java.Calculations;
+import methods.Calculations;
 public class CalculationsTester {
     Calculations calculations = new Calculations();
 
