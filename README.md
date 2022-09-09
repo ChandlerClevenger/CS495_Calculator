@@ -20,6 +20,7 @@ A quaternary calculator is a calculator that works in base 4.
 
 ## Contributions
 Chandler Clevenger = basic UI and button logic
+Robert Duncan = Underlying logic and tests
 
 ## Meetings
 ### Meeting 1
@@ -30,6 +31,6 @@ What was discussed -  <br>
 
 ### Meeting 2 
 Date/time - 9/9/22 <br>
-Attendees - Robert, Dawson <br>
+Attendees - Robert, Dawson, Chandler <br>
 Medium - Discord <br>
 What was discussed - The project as a whole and finishing up <br>
