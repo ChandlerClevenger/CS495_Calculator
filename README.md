@@ -19,8 +19,8 @@ For this project we were assigned to groups and were given the task of creating 
 A quaternary calculator is a calculator that works in base 4.
 
 ## Contributions
-Chandler Clevenger = basic UI and button logic
-Robert Duncan = Underlying logic and tests
+Chandler Clevenger = basic UI and button logic <br>
+Robert Duncan = Underlying logic and tests <br>
 
 ## Meetings
 ### Meeting 1
