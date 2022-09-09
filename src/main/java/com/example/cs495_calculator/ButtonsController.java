@@ -3,11 +3,10 @@ package com.example.cs495_calculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import methods.Function;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import methods.Function;
 
 public class ButtonsController {
     final Function arithmeticLogic = new Function();
@@ -23,7 +22,48 @@ public class ButtonsController {
         Pattern pattern = Pattern.compile("([0-3]+)\\W*([/*+-])\\W*([0-3]+)");
         Matcher matcher = pattern.matcher(currentText);
         if (!matcher.find()) { error.setText("Please enter a valid expression."); return; }
+        final String operand = matcher.group(2);
+        final int firstNumber = parseToDecimal(matcher.group(1));
+        final int secondNumber = parseToDecimal(matcher.group(3));
 
+        switch (operand) {
+            case "+":
+                // Do add
+                final int added = arithmeticLogic.add(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(added))
+                );
+                break;
+            case "-":
+                if (firstNumber < secondNumber) {
+                    error.setText("We don't have to handle negatives.");
+                    return;
+                }
+                // Do subtract
+                final int subtracted = arithmeticLogic.subtract(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(subtracted))
+                );
+                break;
+            case "/":
+                // Do divide
+                if(secondNumber == 0){
+                    error.setText("Divide by 0 error");
+                    equationInput.clear();
+                }else {
+                    final int divided = arithmeticLogic.divide(firstNumber, secondNumber);
+                    equationInput.setText(
+                            String.valueOf(arithmeticLogic.decimalToQuaternary(divided))
+                    );
+                    break;
+                }
+            case "*":
+                // Do mult
+                final int multiplied = arithmeticLogic.multiply(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(multiplied))
+                );
+                break;
         int result = 0;
         try {
             final String operand = matcher.group(2);

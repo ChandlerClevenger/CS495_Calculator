@@ -15,6 +15,9 @@ public class Function {
     }
 
     public int decimalToQuaternary(int decimal){
+        if(decimal == 0){
+            return 0;
+        }
         StringBuilder result = new StringBuilder();
         while(decimal > 0) {
             result.append(decimal % 4);
