@@ -3,11 +3,10 @@ package com.example.cs495_calculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import methods.Function;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import methods.Function;
 
 public class ButtonsController {
     final Function arithmeticLogic = new Function();
@@ -49,11 +48,16 @@ public class ButtonsController {
                 break;
             case "/":
                 // Do divide
-                final int divided = arithmeticLogic.divide(firstNumber, secondNumber);
-                equationInput.setText(
-                        String.valueOf(arithmeticLogic.decimalToQuaternary(divided))
-                );
-                break;
+                if(secondNumber == 0){
+                    error.setText("Divide by 0 error");
+                    equationInput.clear();
+                }else {
+                    final int divided = arithmeticLogic.divide(firstNumber, secondNumber);
+                    equationInput.setText(
+                            String.valueOf(arithmeticLogic.decimalToQuaternary(divided))
+                    );
+                    break;
+                }
             case "*":
                 // Do mult
                 final int multiplied = arithmeticLogic.multiply(firstNumber, secondNumber);
