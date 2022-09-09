@@ -28,26 +28,26 @@ public class Function {
     }
 
     public int add(int left, int right){
-        return left + right;
+        return decimalToQuaternary(quaternaryToDecimal(left) + quaternaryToDecimal(right));
     }
 
     public int subtract(int left, int right){
-        return left - right;
+        return decimalToQuaternary(quaternaryToDecimal(left) - quaternaryToDecimal(right));
     }
 
     public int multiply(int left, int right){
-        return left * right;
+        return decimalToQuaternary((quaternaryToDecimal(left) * quaternaryToDecimal(right)));
     }
 
     public int divide(int left, int right){
-        return left / right;
+        return decimalToQuaternary(quaternaryToDecimal(left) / quaternaryToDecimal(right));
     }
 
     public int squareRoot(int number){
-        return (int) Math.sqrt(number);
+        return decimalToQuaternary((int) Math.sqrt(quaternaryToDecimal(number)));
     }
 
     public int square(int number){
-        return number^2;
+        return decimalToQuaternary(quaternaryToDecimal((int) Math.pow(number, 2)));
     }
 }

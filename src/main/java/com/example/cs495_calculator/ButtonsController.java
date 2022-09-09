@@ -22,7 +22,6 @@ public class ButtonsController {
         Pattern pattern = Pattern.compile("([0-3]+)\\W*([/*+-])\\W*([0-3]+)");
         Matcher matcher = pattern.matcher(currentText);
         if (!matcher.find()) { error.setText("Please enter a valid expression."); return; }
-
         final String operand = matcher.group(2);
         final int firstNumber = parseToDecimal(matcher.group(1));
         final int secondNumber = parseToDecimal(matcher.group(3));
@@ -65,14 +64,41 @@ public class ButtonsController {
                         String.valueOf(arithmeticLogic.decimalToQuaternary(multiplied))
                 );
                 break;
+        int result = 0;
+        try {
+            final String operand = matcher.group(2);
+            final int firstNumber = Integer.parseInt(matcher.group(1));
+            final int secondNumber = Integer.parseInt(matcher.group(3));
+            switch (operand) {
+                case "+":
+                    result = arithmeticLogic.add(firstNumber, secondNumber);
+                    break;
+                case "-":
+                    if (firstNumber < secondNumber) {
+                        error.setText("We don't have to handle negatives.");
+                        return;
+                    }
+                    result = arithmeticLogic.subtract(firstNumber, secondNumber);
+                    break;
+                case "/":
+                    result = arithmeticLogic.divide(firstNumber, secondNumber);
+                    break;
+                case "*":
+                    result = arithmeticLogic.multiply(firstNumber, secondNumber);
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            error.setText("Entered numbers or result is too large.");
+            return;
         }
+
+        equationInput.setText(
+                String.valueOf(result)
+        );
     }
 
     @FXML
     protected void addSymbol(String s) {
-        // We can write a lot of checks on the equation string here
-        // such as Integet.MAX_SIZE ~ or such
-        // and disable buttons if a operand is already selected
         error.setText("");
         final String currentText = equationInput.getText();
         if (isSymbol(currentText) && (
@@ -83,6 +109,7 @@ public class ButtonsController {
         }
         equationInput.setText(currentText + s);
     }
+
     @FXML
     private void handle0() {
         addSymbol("0");
@@ -120,9 +147,5 @@ public class ButtonsController {
         Pattern pattern = Pattern.compile("[/*+-]");
         Matcher matcher = pattern.matcher(s);
         return matcher.find();
-    }
-
-    private int parseToDecimal(String qua) {
-        return arithmeticLogic.quaternaryToDecimal(Integer.parseInt(qua));
     }
 }
