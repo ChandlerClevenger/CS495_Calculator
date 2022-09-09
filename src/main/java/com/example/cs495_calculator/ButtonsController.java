@@ -7,7 +7,10 @@ import javafx.scene.control.TextField;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import methods.Function;
+
 public class ButtonsController {
+    final Function arithmeticLogic = new Function();
     @FXML
     private TextField equationInput;
 
@@ -16,31 +19,48 @@ public class ButtonsController {
 
     @FXML
     private void handleEnter() {
-        error.setText("Enter was pressed TEST");
         final String currentText = equationInput.getText();
         Pattern pattern = Pattern.compile("([0-3]+)\\W*([/*+-])\\W*([0-3]+)");
         Matcher matcher = pattern.matcher(currentText);
-        if (matcher.find()) {
-            final String operand = matcher.group(2);
-            final String firstNumber = matcher.group(1);
-            final String secondNumber = matcher.group(3);
-            switch (operand) {
-                case "+":
-                    // Do add
-                    break;
-                case "-":
-                    // Do subtract
-                    break;
-                case "/":
-                    // Do divide
-                    break;
-                case "*":
-                    // Do mult
-                    break;
-            }
+        if (!matcher.find()) { error.setText("Please enter a valid expression."); return; }
 
-        } else {
-            System.out.println("We no found er");
+        final String operand = matcher.group(2);
+        final int firstNumber = parseToDecimal(matcher.group(1));
+        final int secondNumber = parseToDecimal(matcher.group(3));
+
+        switch (operand) {
+            case "+":
+                // Do add
+                final int added = arithmeticLogic.add(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(added))
+                );
+                break;
+            case "-":
+                if (firstNumber < secondNumber) {
+                    error.setText("We don't have to handle negatives.");
+                    return;
+                }
+                // Do subtract
+                final int subtracted = arithmeticLogic.subtract(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(subtracted))
+                );
+                break;
+            case "/":
+                // Do divide
+                final int divided = arithmeticLogic.divide(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(divided))
+                );
+                break;
+            case "*":
+                // Do mult
+                final int multiplied = arithmeticLogic.multiply(firstNumber, secondNumber);
+                equationInput.setText(
+                        String.valueOf(arithmeticLogic.decimalToQuaternary(multiplied))
+                );
+                break;
         }
     }
 
@@ -96,5 +116,9 @@ public class ButtonsController {
         Pattern pattern = Pattern.compile("[/*+-]");
         Matcher matcher = pattern.matcher(s);
         return matcher.find();
+    }
+
+    private int parseToDecimal(String qua) {
+        return arithmeticLogic.quaternaryToDecimal(Integer.parseInt(qua));
     }
 }
