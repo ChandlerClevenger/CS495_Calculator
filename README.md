@@ -20,6 +20,7 @@ A quaternary calculator is a calculator that works in base 4.
 ## Contributions
 Chandler Clevenger = basic UI and button logic <br>
 Robert Duncan = Underlying logic and tests <br>
+Andrew Dickinson = CSS stylesheets and button logic <br>
 
 ## Dependencies
 JUnit Jupiter API 5.8.2<br>
