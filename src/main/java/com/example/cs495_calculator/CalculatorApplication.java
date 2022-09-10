@@ -3,6 +3,7 @@ package com.example.cs495_calculator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ public class CalculatorApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CalculatorApplication.class.getResource("calculator.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        Image icon = new Image(String.valueOf(CalculatorApplication.class.getResource("pixil-marge.png")));
+        stage.getIcons().add(icon);
         stage.setResizable(false);
         stage.setTitle("Quaternary Calculator");
         stage.setScene(scene);
