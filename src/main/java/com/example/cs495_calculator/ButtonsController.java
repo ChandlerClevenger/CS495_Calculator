@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 public class ButtonsController {
     final Function arithmeticLogic = new Function();
+    private boolean isCNVT = false;
     @FXML
     private TextField equationInput;
 
@@ -18,6 +19,7 @@ public class ButtonsController {
 
     @FXML
     private void handleEnter() {
+        if (checkIsCNVT()) {return;}
         final String currentText = equationInput.getText();
         Pattern pattern = Pattern.compile("([0-3]+)\\W*([/*+-])\\W*([0-3]+)");
         Matcher matcher = pattern.matcher(currentText);
@@ -63,11 +65,13 @@ public class ButtonsController {
 
     @FXML
     protected void addSymbol(String s) {
-        error.setText("");
+        if (checkIsCNVT()) {return;}
         final String currentText = equationInput.getText();
-        if (isSymbol(currentText) && (
-                s.equals(" + ") || s.equals(" / ") || s.equals(" - ") || s.equals(" * ")
-                )){
+        if (!isOnlyDigits() && isOperand(s)) {
+            error.setText("You must enter digits first, then operator");
+            return;
+        }
+        if (isSymbol(currentText) && isOperand(s)){
             error.setText("Only one operand allowed.");
             return;
         }
@@ -109,9 +113,10 @@ public class ButtonsController {
     }
     @FXML
     private void handleSqr() {
+        if (checkIsCNVT()) {return;}
         error.setText("");
         final String number = equationInput.getText();
-        if(!Pattern.compile("^\\d+$").matcher(number).find()) {
+        if(!isOnlyDigits()) {
             error.setText("You must only have digits to square");
             return;
         }
@@ -123,23 +128,56 @@ public class ButtonsController {
     }
     @FXML
     private void handleSqrt() {
+        if (checkIsCNVT()) {return;}
         error.setText("");
         final String number = equationInput.getText();
-        if(!Pattern.compile("^\\d+$").matcher(number).find()) {
+        if(!isOnlyDigits()) {
             error.setText("You must only have digits to square root");
             return;
         }
         equationInput.setText(String.valueOf(arithmeticLogic.squareRoot(Integer.parseInt(number))));
     }
 
-    private boolean isSymbol(String s) {
-        Pattern pattern = Pattern.compile("[/*+-]");
-        Matcher matcher = pattern.matcher(s);
-        return matcher.find();
+    @FXML
+    private void handleClear() {
+        isCNVT = false;
+        error.setText("");
+        equationInput.setText("");
+    }
+    @FXML
+    private void handleCNVT() {
+        final int converted;
+        if (!isOnlyDigits()) {
+            error.setText("You must have only digits to convert!");
+            return;
+        }
+        if (isCNVT) {
+            converted = arithmeticLogic.decimalToQuaternary(Integer.parseInt(equationInput.getText()));
+        } else {
+            converted = arithmeticLogic.quaternaryToDecimal(Integer.parseInt(equationInput.getText()));
+        }
+        equationInput.setText(String.valueOf(converted));
+        isCNVT = !isCNVT;
     }
 
-    @FXML
-    private void handleClear(){
-        equationInput.setText("");
+    private boolean checkIsCNVT() {
+        error.setText("");
+        if (isCNVT) {
+            error.setText("You must un-convert or erase to continue.");
+        }
+        return isCNVT;
+    }
+
+    private boolean isOnlyDigits() {
+        final String s = equationInput.getText();
+        return Pattern.compile("^\\d+$").matcher(s).find();
+    }
+
+    private boolean isOperand(String s) {
+        return (s.equals(" + ") || s.equals(" / ") || s.equals(" - ") || s.equals(" * "));
+    }
+
+    private boolean isSymbol(String s) {
+        return Pattern.compile("[/*+-]").matcher(s).find();
     }
 }
