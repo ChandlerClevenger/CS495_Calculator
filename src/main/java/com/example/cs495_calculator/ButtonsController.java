@@ -74,6 +74,7 @@ public class ButtonsController {
         equationInput.setText(currentText + s);
     }
 
+
     @FXML
     private void handle0() {
         addSymbol("0");
@@ -135,5 +136,10 @@ public class ButtonsController {
         Pattern pattern = Pattern.compile("[/*+-]");
         Matcher matcher = pattern.matcher(s);
         return matcher.find();
+    }
+
+    @FXML
+    private void handleClear(){
+        equationInput.setText("");
     }
 }
