@@ -67,12 +67,12 @@ public class ButtonsController {
     protected void addSymbol(String s) {
         if (checkIsCNVT()) {return;}
         final String currentText = equationInput.getText();
-        if (!isOnlyDigits() && isOperand(s)) {
-            error.setText("You must enter digits first, then operator");
-            return;
-        }
         if (isSymbol(currentText) && isOperand(s)){
             error.setText("Only one operand allowed.");
+            return;
+        }
+        if (!isOnlyDigits() && isOperand(s)) {
+            error.setText("You must enter digits first, then operator");
             return;
         }
         equationInput.setText(currentText + s);
