@@ -23,10 +23,10 @@ Chandler Clevenger = basic UI and button logic <br>
 Robert Duncan = Underlying logic and tests <br>
 
 ## Dependencies
-JUnit Jupiter API 5.8.2
-JUnit Jupiter Engine 5.8.2
-org.openjfx:javafx-controls 18-ea+6
-org.openjfx:javafx-fxml 18-ea+6
+JUnit Jupiter API 5.8.2<br>
+JUnit Jupiter Engine 5.8.2<br>
+org.openjfx:javafx-controls 18-ea+6<br>
+org.openjfx:javafx-fxml 18-ea+6<br>
 
 ## Meetings
 ### Meeting 1
