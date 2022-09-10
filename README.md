@@ -5,13 +5,13 @@
 
 ## About
 
-It's a Quaternary Calculator
+This is a calculator that does it's calculations in base 4 or "quaternary."
 
 ## Manual
 
 To use this quaternary calculator you enter a value, an operator sign, and another value. Then you hit enter. 
-Hitting enter will display the result of the entered equation. You can click the clear button to reverse any accidental 
-input.
+Hitting enter will display the result of the entered equation. Alternatively, you can enter a single value and hit the square or square root button to perform the respective command on that value. The altered value will appear in the calculator when you press the square or square root button. You can click the clear button to reverse any accidental 
+input. You can also see what the decimal value of the number is by clicking the conversion button.
 
 ## Goal and requirements
 
@@ -21,6 +21,12 @@ A quaternary calculator is a calculator that works in base 4.
 ## Contributions
 Chandler Clevenger = basic UI and button logic <br>
 Robert Duncan = Underlying logic and tests <br>
+
+## Dependencies
+JUnit Jupiter API 5.8.2
+JUnit Jupiter Engine 5.8.2
+org.openjfx:javafx-controls 18-ea+6
+org.openjfx:javafx-fxml 18-ea+6
 
 ## Meetings
 ### Meeting 1
