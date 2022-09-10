@@ -107,6 +107,28 @@ public class ButtonsController {
     private void handleDiv() {
         addSymbol(" / ");
     }
+    @FXML
+    private void handleSqr() {
+        final String number = equationInput.getText();
+        if(!Pattern.compile("^\\d+$").matcher(number).find()) {
+            error.setText("You must only have digits to square");
+            return;
+        }
+        try {
+            equationInput.setText(String.valueOf(arithmeticLogic.square(Integer.parseInt(number))));
+        } catch (NumberFormatException e) {
+            error.setText("Result is too big");
+        }
+    }
+    @FXML
+    private void handleSqrt() {
+        final String number = equationInput.getText();
+        if(!Pattern.compile("^\\d+$").matcher(number).find()) {
+            error.setText("You must only have digits to square root");
+            return;
+        }
+        equationInput.setText(String.valueOf(arithmeticLogic.squareRoot(Integer.parseInt(number))));
+    }
 
     private boolean isSymbol(String s) {
         Pattern pattern = Pattern.compile("[/*+-]");
