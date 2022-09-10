@@ -108,6 +108,7 @@ public class ButtonsController {
     }
     @FXML
     private void handleSqr() {
+        error.setText("");
         final String number = equationInput.getText();
         if(!Pattern.compile("^\\d+$").matcher(number).find()) {
             error.setText("You must only have digits to square");
@@ -121,6 +122,7 @@ public class ButtonsController {
     }
     @FXML
     private void handleSqrt() {
+        error.setText("");
         final String number = equationInput.getText();
         if(!Pattern.compile("^\\d+$").matcher(number).find()) {
             error.setText("You must only have digits to square root");
